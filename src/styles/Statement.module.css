@@ -1,0 +1,8 @@
+.statement {
+    display: flex;
+}
+
+.text {
+    font-size: 3rem;
+    font-weight: 800;
+}

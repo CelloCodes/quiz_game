@@ -1,14 +1,15 @@
 import AnswerModel from "./answer";
+import {shuffle} from "../functions/arrays";
 
 export default class QuestionModel {
     #id: number
-    #question: string
+    #statement: string
     #answers: AnswerModel[]
     #answered_right: boolean
 
-    constructor(id: number, question: string, answers: AnswerModel[], answered_right = false) {
+    constructor(id: number, statement: string, answers: AnswerModel[], answered_right = false) {
         this.#id = id
-        this.#question = question
+        this.#statement= statement
         this.#answers = answers
         this.#answered_right = answered_right
     }
@@ -17,8 +18,8 @@ export default class QuestionModel {
         return this.#id
     }
 
-    get question() {
-        return this.#question
+    get statement() {
+        return this.#statement
     }
 
     get answers() {
@@ -37,10 +38,26 @@ export default class QuestionModel {
         return false
     }
 
+    answer_question(index: number): QuestionModel {
+        const answered_right = this.answers[index]?.correct
+        const answers = this.answers.map((answer, i) => {
+            if ((index === i) || (answer.correct)) {
+                return answer.reveal()
+            }
+            return answer
+        })
+        return new QuestionModel(this.id, this.statement, answers, answered_right)
+    }
+
+    shuffle_answers(): QuestionModel {
+        let shuffled_answers = shuffle(this.answers)
+        return new QuestionModel(this.id, this.statement, shuffled_answers, this.answered_right)
+    }
+
     to_object() {
         return {
             id: this.id,
-            question: this.question,
+            statement: this.statement,
             answers: this.answers.map(answer => answer.to_object()),
             answered_right: this.answered_right
         }

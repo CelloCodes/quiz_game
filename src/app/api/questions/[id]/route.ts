@@ -9,7 +9,7 @@ export async function GET(req, res) {
     let response = {}
     let status = { status: 404 }
     if(selected_questions.length === 1) {
-        response = { question: selected_questions[0].to_object() }
+        response = { question: selected_questions[0].shuffle_answers().to_object() }
         status = { status: 200 }
     }
 
