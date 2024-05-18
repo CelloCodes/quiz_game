@@ -27,6 +27,27 @@
     color: black;
 }
 
+.back > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    border-radius: 12px;
+}
+
+.correct {
+    background-color: forestgreen;
+}
+
+.wrong {
+    background-color: firebrick;
+}
+
+.correct .value, .wrong .value {
+    font-size: 1.5rem;
+}
+
 .letter {
     display: flex;
     margin-right: 10px;

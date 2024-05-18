@@ -6,6 +6,7 @@ import Statement from "./Statement";
 import Answer from "./Answer";
 import {on} from "next/dist/client/components/react-dev-overlay/pages/bus";
 import {Bonheur_Royale} from "next/dist/compiled/@next/font/dist/google";
+import Timer from "./Timer";
 
 const letters = [
     { value: 'A', color: 'lightcoral' },
@@ -17,6 +18,7 @@ const letters = [
 interface QuestionProps {
     question: QuestionModel
     on_response: (index: number) => void
+    time_over: () => void
 }
 
 export default function Question(props) {
@@ -33,6 +35,7 @@ export default function Question(props) {
     return (
         <div className={styles.question}>
             <Statement value={question.statement} />
+            <Timer duration={10} time_over={props.time_over}/>
             {render_answers()}
         </div>
     )
