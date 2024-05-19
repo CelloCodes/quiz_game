@@ -62,4 +62,9 @@ export default class QuestionModel {
             answered_right: this.answered_right
         }
     }
+
+    static from_object(model: QuestionModel): QuestionModel {
+        const answers = model.answers.map(answer => AnswerModel.from_object(answer))
+        return new QuestionModel(model.id, model.statement, answers, model.answered_right)
+    }
 }

@@ -1,5 +1,6 @@
 .statement {
     display: flex;
+    justify-content: center;
 }
 
 .text {

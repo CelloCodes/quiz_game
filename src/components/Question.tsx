@@ -18,15 +18,20 @@ const letters = [
 interface QuestionProps {
     question: QuestionModel
     on_response: (index: number) => void
+    time_to_answer?: number
     time_over: () => void
 }
 
-export default function Question(props) {
+export default function Question(props: QuestionProps) {
     const question = props.question
+    const time_to_answer = props.time_to_answer ? props.time_to_answer : 10
 
     function render_answers () {
         return question.answers.map((answer, i) => {
-            return <Answer key={i} value={answer} index={i} letter={letters[i].value}
+            return <Answer key={`${question.id}-${i}`}
+                           value={answer}
+                           index={i}
+                           letter={letters[i].value}
                            letter_background_color={letters[i].color}
                            on_response={props.on_response} />
         })
@@ -35,7 +40,9 @@ export default function Question(props) {
     return (
         <div className={styles.question}>
             <Statement value={question.statement} />
-            <Timer duration={10} time_over={props.time_over}/>
+            <Timer key={question.id}
+                   duration={time_to_answer}
+                   time_over={props.time_over}/>
             {render_answers()}
         </div>
     )
