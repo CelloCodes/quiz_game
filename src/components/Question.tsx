@@ -4,8 +4,6 @@ import QuestionModel from "../models/question";
 import styles from '../styles/Question.module.css'
 import Statement from "./Statement";
 import Answer from "./Answer";
-import {on} from "next/dist/client/components/react-dev-overlay/pages/bus";
-import {Bonheur_Royale} from "next/dist/compiled/@next/font/dist/google";
 import Timer from "./Timer";
 
 const letters = [

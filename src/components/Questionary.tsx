@@ -6,6 +6,7 @@ import Button from "./Button";
 interface QuestionaryProps {
     question: QuestionModel
     last_question: boolean
+    time_to_answer: number
     on_answer: (question: QuestionModel) => void
     advance: () => void
 }
@@ -21,14 +22,16 @@ export default function Questionary(props: QuestionaryProps) {
         <div className={styles.questionary}>
             {props.question ?
                 <Question question={props.question}
-                          time_to_answer={10}
+                          time_to_answer={props.time_to_answer}
                           on_response={on_response}
                           time_over={() => on_response(-1)}
                 />
                           : false
             }
-            <Button on_click={props.advance}
-                    text={props.last_question ? 'Finish' : 'Next'}/>
+            <div style={{ marginTop: '40px' }}>
+                <Button on_click={props.advance}
+                        text={props.last_question ? 'Finish' : 'Next'}/>
+            </div>
         </div>
     )
 }
